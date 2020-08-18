@@ -675,12 +675,18 @@ module.exports = function(webpackEnv) {
             manifest[file.name] = file.path;
             return manifest;
           }, seed);
+          const indexEntryPoints = entrypoints.index.filter(fileName => !fileName.endsWith('.map'));
+          const orderEntryPoints = entrypoints.index.filter(fileName => !fileName.endsWith('.map'));
+          const queryEntryPoints = entrypoints.index.filter(fileName => !fileName.endsWith('.map'));
+          const ticketEntryPoints = entrypoints.index.filter(fileName => !fileName.endsWith('.map'));
           const entrypointFiles = [
-            ...entrypoints.index,
-            ...entrypoints.order,
-            ...entrypoints.query,
-            ...entrypoints.ticket,
+            ...indexEntryPoints,
+            ...orderEntryPoints,
+            ...queryEntryPoints,
+            ...ticketEntryPoints,
           ];
+
+          console.log(entrypointFiles)
 
           return {
             files: manifestFiles,
