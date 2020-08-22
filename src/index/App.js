@@ -8,7 +8,7 @@ import DepartDate from './DepartDate'
 import HighSpeed from './HighSpeed'
 import Submit from './Submit'
 import CitySelector from '../common/CitySelector'
-import { exchangeFromTo, hideCitySelector, showCitySelector } from './actions'
+import { exchangeFromTo, hideCitySelector, showCitySelector, fetchCityData } from './actions'
 import './App.css'
 
 const App = (props) => {
@@ -34,6 +34,8 @@ const App = (props) => {
     return bindActionCreators({
       // 隐藏城市选择器
       onBack: hideCitySelector,
+      // 获取城市数据
+      fetchCityData,
     }, dispatch)
   }, [])
 
