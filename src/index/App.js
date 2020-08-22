@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 
 import Header from '../common/Header'
@@ -10,9 +10,19 @@ import Submit from './Submit'
 import './App.css'
 
 const App = (props) => {
+
+  /**
+   * 头部栏点击返回的回调方法
+   */
+  const onBack = useCallback(() => {
+    window.history.back()
+  }, [])
+
   return (
     <div>
-      <Header />
+      <div className="header-wrapper">
+        <Header title="火车票" onBack={onBack} />
+      </div>
       <Journey />
       <DepartDate />
       <HighSpeed />
