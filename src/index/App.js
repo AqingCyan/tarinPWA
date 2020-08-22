@@ -7,11 +7,12 @@ import Journey from './Journey'
 import DepartDate from './DepartDate'
 import HighSpeed from './HighSpeed'
 import Submit from './Submit'
-import { exchangeFromTo, showCitySelector } from './actions'
+import CitySelector from '../common/CitySelector'
+import { exchangeFromTo, hideCitySelector, showCitySelector } from './actions'
 import './App.css'
 
 const App = (props) => {
-  const { from, to, dispatch } = props
+  const { from, to, dispatch, isCitySelectVisible, cityData, isLoadingCityData } = props
 
   /**
    * 头部栏点击返回的回调方法
@@ -20,12 +21,19 @@ const App = (props) => {
     window.history.back()
   }, [])
 
-  const callbacks = useMemo(() => {
+  const journeyCallbacks = useMemo(() => {
     return bindActionCreators({
       // 切换始发终点站
       exchangeFromTo,
       // 点击打开选择站点的浮层
       showCitySelector,
+    }, dispatch)
+  }, [])
+
+  const citySelectorCallbacks = useMemo(() => {
+    return bindActionCreators({
+      // 隐藏城市选择器
+      onBack: hideCitySelector,
     }, dispatch)
   }, [])
 
@@ -38,9 +46,15 @@ const App = (props) => {
         <Journey
           from={from}
           to={to}
-          {...callbacks}
+          {...journeyCallbacks}
         />
       </form>
+      <CitySelector
+        show={isCitySelectVisible}
+        cityData={cityData}
+        isLoading={isLoadingCityData}
+        {...citySelectorCallbacks}
+      />
       <DepartDate />
       <HighSpeed />
       <Submit />
