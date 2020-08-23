@@ -11,6 +11,7 @@ const preloadedState = {
   cityData: null,
   isLoadingCityData: false,
   isDateSelectVisible: false,
+  departDate: Date.now(),
   highSpeed: false,
 }
 

@@ -8,11 +8,11 @@ import DepartDate from './DepartDate'
 import HighSpeed from './HighSpeed'
 import Submit from './Submit'
 import CitySelector from '../common/CitySelector'
-import { exchangeFromTo, hideCitySelector, showCitySelector, fetchCityData, setSelectedCity } from './actions'
+import { exchangeFromTo, hideCitySelector, showCitySelector, fetchCityData, setSelectedCity, showDateSelector } from './actions'
 import './App.css'
 
 const App = (props) => {
-  const { from, to, dispatch, isCitySelectVisible, cityData, isLoadingCityData } = props
+  const { from, to, dispatch, isCitySelectVisible, cityData, isLoadingCityData, departDate } = props
 
   /**
    * 头部栏点击返回的回调方法
@@ -41,6 +41,13 @@ const App = (props) => {
     }, dispatch)
   }, [])
 
+  const departDateCallbacks = useMemo(() => {
+    return bindActionCreators({
+      // 展示日期选择浮层
+      onClick: showDateSelector,
+    }, dispatch)
+  }, [])
+
   return (
     <div>
       <div className="header-wrapper">
@@ -59,7 +66,10 @@ const App = (props) => {
         isLoading={isLoadingCityData}
         {...citySelectorCallbacks}
       />
-      <DepartDate />
+      <DepartDate
+        time={departDate}
+        {...departDateCallbacks}
+      />
       <HighSpeed />
       <Submit />
     </div>
