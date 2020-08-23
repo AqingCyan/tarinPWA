@@ -1,11 +1,8 @@
 .high-speed {
-    padding: 0 15px;
     position: relative;
-    background: #fff;
     height: 46px;
     line-height: 46px;
     display: flex;
-    border-bottom: 1px solid #eaeaea;
 }
 
 .high-speed-label {

@@ -86,12 +86,21 @@ const App = (props) => {
       <div className="header-wrapper">
         <Header title="火车票" onBack={onBack} />
       </div>
-      <form className="form">
+      <form className="form" action="./query.html">
         <Journey
           from={from}
           to={to}
           {...journeyCallbacks}
         />
+        <DepartDate
+          time={departDate}
+          {...departDateCallbacks}
+        />
+        <HighSpeed
+          highSpeed={highSpeed}
+          {...highSpeedCallbacks}
+        />
+        <Submit />
       </form>
       <CitySelector
         show={isCitySelectVisible}
@@ -99,20 +108,11 @@ const App = (props) => {
         isLoading={isLoadingCityData}
         {...citySelectorCallbacks}
       />
-      <DepartDate
-        time={departDate}
-        {...departDateCallbacks}
-      />
       <DateSelector
         show={isDateSelectVisible}
         {...dateSelectorCallbacks}
         onSelect={onSelectDate}
       />
-      <HighSpeed
-        highSpeed={highSpeed}
-        {...highSpeedCallbacks}
-      />
-      <Submit />
     </div>
   )
 }

@@ -1,5 +1,7 @@
 .submit {
     padding: 10px 0 17px 0;
+    background: #fff;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .submit-button {
