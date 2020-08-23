@@ -18,12 +18,13 @@ import {
   showDateSelector,
   hideDateSelector,
   setDepartDate,
+  toggleHighSpeed,
 } from './actions'
 import './App.css'
 import { h0 } from '../common/fp'
 
 const App = (props) => {
-  const { from, to, dispatch, isCitySelectVisible, cityData, isLoadingCityData, departDate, isDateSelectVisible } = props
+  const { from, to, dispatch, isCitySelectVisible, cityData, isLoadingCityData, departDate, isDateSelectVisible, highSpeed } = props
 
   /**
    * 头部栏点击返回的回调方法
@@ -74,6 +75,12 @@ const App = (props) => {
     dispatch(hideDateSelector())
   }, [])
 
+  const highSpeedCallbacks = useMemo(() => {
+    return bindActionCreators({
+      toggle: toggleHighSpeed,
+    }, dispatch)
+  }, [])
+
   return (
     <div>
       <div className="header-wrapper">
@@ -101,7 +108,10 @@ const App = (props) => {
         {...dateSelectorCallbacks}
         onSelect={onSelectDate}
       />
-      <HighSpeed />
+      <HighSpeed
+        highSpeed={highSpeed}
+        {...highSpeedCallbacks}
+      />
       <Submit />
     </div>
   )
